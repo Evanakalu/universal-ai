@@ -31,7 +31,9 @@ test('only models that passed EthioEval for this language and task are used, che
   r.recordEval('google/gemini-3.8-flash', 'am', 'document_generation', 4.3, true, 'run-1');
   r.recordEval('anthropic/claude-haiku-5-5', 'am', 'document_generation', 3.6, false, 'run-1');
   const ids = r.route(docRequest).candidates.map((c) => c.model.id);
-  assert.deepEqual(ids, ['google/gemini-3.8-flash', 'anthropic/claude-sonnet-5-5']);
+  // Gemini paid is excluded until Google's training terms for API logs are resolved
+  // (trainsOnApiData is 'unknown' in seed-models.ts), so only Sonnet remains.
+  assert.deepEqual(ids, ['anthropic/claude-sonnet-5-5']);
   // Passing in Amharic says nothing about Tigrinya.
   assert.equal(r.route({ ...docRequest, language: 'ti' }).candidates.length, 0);
 });

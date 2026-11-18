@@ -6,8 +6,14 @@ import type { ModelEntry } from './models.ts';
  * customer work until Phase 0 scores are recorded. Operations lists are conservative and
  * must be confirmed against each provider's model page in Phase 0.
  *
- * NOT YET VERIFIED: storageCountries for Anthropic and Google ('US') and Anthropic's
- * retentionDays are working assumptions; the training terms are from the cited pages.
+ * Data terms checked 18 Nov 2026 from provider help and privacy pages (search snippets; the
+ * pages themselves were not fetched). Anthropic: API inputs and outputs deleted within 30 days;
+ * zero data retention is available on request, not by default. Google paid Gemini API: logs
+ * kept up to 55 days for abuse monitoring, and the paid terms say prompts are not used to
+ * improve products, but Google's logs page says logs may be used for training when logs
+ * sharing is on, so training use is marked 'unknown' until resolved.
+ *
+ * STILL UNVERIFIED: storageCountries for Anthropic and Google ('US') are working assumptions.
  * Phase 0 replaces them with values from each provider's data processing addendum.
  */
 const CHECKED = '2026-11-18';
@@ -16,6 +22,8 @@ const ANTHROPIC_TERMS = 'https://privacy.claude.com/en/articles/7996868-how-long
 const GEMINI_PRICING = 'https://ai.google.dev/gemini-api/docs/pricing';
 const GEMINI_TERMS = 'https://ai.google.dev/gemini-api/terms';
 
+// Zero data retention is by arrangement with Anthropic sales, not a default. Claude Fable 5 and
+// Mythos 5 ("Covered Models") need 30-day retention even under ZDR; they are not seeded here.
 const anthropicTerms = {
   trainsOnApiData: false,
   retentionDays: 30,
@@ -69,8 +77,8 @@ export const SEED_MODELS: ModelEntry[] = [
       { inputPerMillion: 1.5, cachedInputPerMillion: 0.15, outputPerMillion: 7.5, validFrom: '2027-01-01', sourceUrl: GEMINI_PRICING },
     ],
     dataTerms: {
-      trainsOnApiData: false,
-      retentionDays: 'unknown',
+      trainsOnApiData: 'unknown',
+      retentionDays: 55,
       zeroRetentionAvailable: 'unknown',
       storageCountries: ['US'],
       termsUrl: GEMINI_TERMS,
