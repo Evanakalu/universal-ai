@@ -1,0 +1,28 @@
+{
+  "id": "document.create",
+  "version": "0.1.0",
+  "category": "documents",
+  "titleKey": "capability.document_create.title",
+  "outcome": "A formatted document such as a letter, report, proposal or business plan that the user can edit and download as Word, PDF or Markdown",
+  "inputs": [
+    { "name": "brief", "kind": "text", "required": true },
+    { "name": "reference_files", "kind": "file[]" }
+  ],
+  "outputs": [
+    { "name": "document", "kind": "document" },
+    { "name": "exports", "kind": "docx|pdf|md" }
+  ],
+  "needs": {
+    "modelOperations": ["text.generate", "json_output"],
+    "tools": ["artifact.save", "render.docx", "render.pdf"],
+    "evalTask": "document_generation",
+    "languages": ["am", "ti", "om"]
+  },
+  "permissions": {
+    "artifact.save": "automatic",
+    "render.docx": "automatic",
+    "render.pdf": "automatic"
+  },
+  "cost": { "typicalUsd": 0.15, "hardCapUsd": 1.0 },
+  "phase": 1
+}

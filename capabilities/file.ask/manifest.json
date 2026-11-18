@@ -1,0 +1,27 @@
+{
+  "id": "file.ask",
+  "version": "0.1.0",
+  "category": "research",
+  "titleKey": "capability.file_ask.title",
+  "outcome": "Answers about uploaded PDF, Word, Excel or image files, with references to the page or cell used",
+  "inputs": [
+    { "name": "question", "kind": "text", "required": true },
+    { "name": "files", "kind": "file[]", "required": true }
+  ],
+  "outputs": [
+    { "name": "answer", "kind": "text" },
+    { "name": "references", "kind": "citation[]" }
+  ],
+  "needs": {
+    "modelOperations": ["text.generate", "pdf_input", "image_input"],
+    "tools": ["files.read", "files.search"],
+    "evalTask": "file_understanding",
+    "languages": ["am", "ti", "om"]
+  },
+  "permissions": {
+    "files.read": "automatic",
+    "files.search": "automatic"
+  },
+  "cost": { "typicalUsd": 0.05, "hardCapUsd": 1.0 },
+  "phase": 1
+}

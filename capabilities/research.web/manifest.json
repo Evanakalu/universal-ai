@@ -1,0 +1,25 @@
+{
+  "id": "research.web",
+  "version": "0.1.0",
+  "category": "research",
+  "titleKey": "capability.research_web.title",
+  "outcome": "An answer or report built from web research, written in the user's language with cited sources",
+  "inputs": [{ "name": "question", "kind": "text", "required": true }],
+  "outputs": [
+    { "name": "answer", "kind": "text" },
+    { "name": "sources", "kind": "citation[]" }
+  ],
+  "needs": {
+    "modelOperations": ["text.generate", "tool_calling", "web_search"],
+    "tools": ["web.search", "web.fetch", "artifact.save"],
+    "evalTask": "research",
+    "languages": ["am", "ti", "om"]
+  },
+  "permissions": {
+    "web.search": "automatic",
+    "web.fetch": "automatic",
+    "artifact.save": "automatic"
+  },
+  "cost": { "typicalUsd": 0.17, "hardCapUsd": 1.5 },
+  "phase": 1
+}

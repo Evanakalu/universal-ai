@@ -1,0 +1,20 @@
+{
+  "name": "universal-ai",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Universal AI platform: task-oriented AI creation and execution in Amharic, Tigrinya and Afaan Oromo",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "test": "node --experimental-strip-types --no-warnings --test \"packages/**/*.test.ts\" \"capabilities/**/*.test.ts\" \"evals/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "check": "pnpm typecheck && pnpm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "webapp.build",
+  "version": "0.1.0",
+  "category": "software",
+  "titleKey": "capability.webapp_build.title",
+  "outcome": "A working website or interactive web app (calculator, quiz, form, dashboard, game) that runs in the browser, which the user can preview, change by asking, and publish to a link",
+  "inputs": [
+    { "name": "brief", "kind": "text", "required": true },
+    { "name": "assets", "kind": "file[]" }
+  ],
+  "outputs": [
+    { "name": "app_source", "kind": "file-tree" },
+    { "name": "preview", "kind": "preview-url" },
+    { "name": "published", "kind": "public-url" }
+  ],
+  "needs": {
+    "modelOperations": ["text.generate", "tool_calling", "json_output"],
+    "tools": ["files.write", "sandbox.run", "site.preview", "site.publish", "appdata.store"],
+    "evalTask": "technical",
+    "languages": ["am", "ti", "om"]
+  },
+  "permissions": {
+    "files.write": "automatic",
+    "sandbox.run": "automatic",
+    "site.preview": "automatic",
+    "site.publish": "ask",
+    "appdata.store": "automatic"
+  },
+  "cost": { "typicalUsd": 0.3, "hardCapUsd": 2.0 },
+  "phase": 1
+}

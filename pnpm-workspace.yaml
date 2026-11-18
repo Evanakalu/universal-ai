@@ -1,0 +1,4 @@
+packages:
+  - "packages/*"
+  - "capabilities/*"
+  - "apps/*"

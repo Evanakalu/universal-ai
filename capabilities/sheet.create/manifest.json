@@ -1,0 +1,28 @@
+{
+  "id": "sheet.create",
+  "version": "0.1.0",
+  "category": "data",
+  "titleKey": "capability.sheet_create.title",
+  "outcome": "A spreadsheet such as a budget, price list or tracker with working formulas, downloadable as Excel or CSV",
+  "inputs": [
+    { "name": "brief", "kind": "text", "required": true },
+    { "name": "data_files", "kind": "file[]" }
+  ],
+  "outputs": [
+    { "name": "sheet", "kind": "spreadsheet" },
+    { "name": "exports", "kind": "xlsx|csv" }
+  ],
+  "needs": {
+    "modelOperations": ["text.generate", "json_output", "tool_calling"],
+    "tools": ["artifact.save", "sheet.recalculate", "render.xlsx"],
+    "evalTask": "instruction_following",
+    "languages": ["am", "ti", "om"]
+  },
+  "permissions": {
+    "artifact.save": "automatic",
+    "sheet.recalculate": "automatic",
+    "render.xlsx": "automatic"
+  },
+  "cost": { "typicalUsd": 0.1, "hardCapUsd": 1.0 },
+  "phase": 1
+}
